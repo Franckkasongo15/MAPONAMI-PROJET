@@ -1,0 +1,50 @@
+body{
+    text-align: center;
+}
+.formulaire{
+    background-color: rgb(235, 235, 235);
+}
+@media (min-width:576px){
+    body{
+        text-align: center;
+    }
+    .formulaire{
+        background-color: rgb(235, 235, 235);
+    }
+}
+.button{
+    background-color:#008374 ;
+    border-color: #008374;
+}
+
+@media (min-width:768px){
+    body{
+        text-align: center;
+    }
+    .formulaire{
+        background-color: rgb(235, 235, 235);
+        padding: 0 25px 0 25px;
+    }
+
+}
+
+@media (min-width:992px){
+    body{
+        text-align: center;
+    }
+    .formulaire{
+        display: inline-block;
+        background-color: rgb(235, 235, 235);
+        width: 400px;
+    }
+}
+
+@media (min-width:1200px){
+    body{
+        text-align: center;
+    }
+    .formulaire{
+        display: inline-block;
+        background-color: rgb(235, 235, 235);
+    }
+}

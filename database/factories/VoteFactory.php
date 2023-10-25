@@ -25,7 +25,7 @@ class VoteFactory extends Factory
             'photo' => '',
             'vote_number' => $this->faker->numberBetween(1, 20),
             'motivation' => $this->faker->sentences(4, true),
-            'promotion' => $this->faker->randomLetter().$this->faker->numberBetween(1,4),
+            'promotion' => 'l_'.$this->faker->numberBetween(1,4),
             'slogan' => $this->faker->sentences(4, true),
             'email' => $this->faker->email()
         ];

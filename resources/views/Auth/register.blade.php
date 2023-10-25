@@ -44,7 +44,7 @@
     <br>
     <div class="formulaire align-items-center w-5">
 
-        <form action="" class="p-5" method="POST">
+        <form action="/auth/register" class="p-5" method="POST">
             @error('email')
                 {{ $message }}
             @enderror

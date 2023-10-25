@@ -18,51 +18,47 @@ use App\Http\Controllers\AuthentificationController;
 |
 */
 
-Route::get('home', [AuthentificationController::class, 'home'])->name('index');
+Route::get('/', [AuthentificationController::class, 'home'])->name('index');
 
-Route::get('/login', [AuthentificationController::class, 'loadForm'])->name('login');
-
-Route::post('/loginSendData',[AuthentificationController::class, 'AuthVerification']);
-/*
-Route::get('/login', function(){
-    return view('Auth.log
+Route::prefix('/auth')->name('auth.')->controller(AuthentificationController::class)->group( function () {
+    Route::get('/login', 'loadForm')->name('login');
+    Route::post('/login','AuthVerification');
+    Route::delete('/logout', 'logout');
+    Route::get('/register', 'registerRedirect')->name('register');
+    Route::post('/register','register');
 });
-*/
 
-Route::get('voter', [UserAction::class, 'voterPage'])->name('voter');
+Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->group(function (){
+    Route::get('/', 'login')->name('login');
+    Route::post('/','doLogin');
+    Route::prefix('/dash')->name('dash.')->group(function (){
+        Route::get('/','home')->name('index');
+        Route::get('/registerUser', 'registerform')->name('registerUser');
+        Route::post('/registerUser', 'storeUser');
+       // Route::get('/jecree', [AdminController::class, 'AdminCreer']);
 
-Route::post('/jevote', [UserAction::class, 'voting']);
+    })->middleware('auth');
 
-Route::get('/register', [AuthentificationController::class, 'registerRedirect'])->name('Auth.register');
+});
+
+Route::get('/registerUser', [AdminController::class, 'registerform'])->name('registerUser');
+
+//Route::get('/jecree', [AdminController::class, 'AdminCreer']);
+
+//Route::get('/registerUser', [AdminController::class, 'registerform'])->middleware('auth')->name('Admin.registerUser');
+//Route::get('/jecree', [AdminController::class, 'AdminCreer']);
 
 
+Route::prefix('/')->controller(UserAction::class)->name('user.')->group(function (){
+    Route::get('/voter','votePage')->name('vote')->middleware('auth');
+    Route::post('/voter', 'doVote');
+});
 
 
 Route::controller(ImageController::class)->group(function(){
-
     Route::get('image-upload', 'index');
-
     Route::post('image-upload', 'store')->name('image.store');
-
 });
-
-Route::post('/register',[AuthentificationController::class, 'register']);
-
-
-Route::get('/admin2023', [AdminController::class, 'login'])->name('Admin.login');
-
-Route::post('/admin2023', [AdminController::class, 'Dologin']);
-
-Route::get('/adminDash', [AdminController::class, 'home'])->middleware('auth')->name('Admin.dash');
-
-
-
-Route::get('/registerUser', [AdminController::class, 'registerform'])->middleware('auth')->name('Admin.registerUser');
-
-Route::post('/registerUser', [AdminController::class, 'storeUser']);
-Route::get('/logout', [AuthentificationController::class, 'logout'])->name('logout');
-
-Route::get('/jecree', [AdminController::class, 'AdminCreer']);
 
 
 

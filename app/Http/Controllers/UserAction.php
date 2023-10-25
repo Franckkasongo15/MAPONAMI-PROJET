@@ -3,27 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vote;
-use App\Models\voted;
+use App\Models\Voted;
 use Illuminate\Http\Request;
 
 class UserAction extends Controller
 {
-    public function voterPage(){
+    public function votePage(){
         $info_candidats = Vote::all();
-
 
         return view('voter', [
             'info_candidats' => $info_candidats
         ]);
     }
 
-    public function voting(Request $request){
+    public function doVote(Request $request){
 
         if(strtoupper($request->promotionUser) == strtoupper($request->promotionCandidat)){
-            $isUservoted = voted::where('email', strtolower($request->usermail))->get();
+            $isUservoted = Voted::where('email' ,strtolower($request->usermail))->get();
 
             if(sizeof($isUservoted) > 0){
-               return redirect()->route('voter')->with('failed', 'Vous Avez déjà voter');
+               return redirect()->route('user.vote')->with('failed', 'Vous Avez déjà voter');
             }else{
 
                 voted::create([
@@ -43,12 +42,12 @@ class UserAction extends Controller
                 Vote::where('email',$request->candidatmail)->update(['vote_number'=> $vote_incrementations]);
 
                 $vote = Vote::where('email',$request->candidatmail)->get('vote_number');
-                return redirect()->route('voter')->with('success', 'Le vote a ete effectuer avec success');
+                return redirect()->route('user.vote')->with('success', 'Le vote a ete effectuer avec success');
             }
 
         }else{
             echo "pas mm promotion";
-            return redirect()->route('voter')->with('failed', 'Impossible de voter, car le candidat n\'est pass de votre premotion');
+            return redirect()->route('user.vote')->with('failed', 'Impossible de voter, car le candidat n\'est pass de votre premotion');
         }
         //return redirect()->route('voter')->with('success', "Le success message marche tres bien");
 

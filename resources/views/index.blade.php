@@ -56,8 +56,18 @@
                     <li><a href="/home">Accueil</a></li>
                     <li><a href="/voter">Voter</a></li>
                     <li><a href="#contact">Statistiques</a></li>
-                    <li><a href="logout">Se deconnecter</a></li>
-
+                    @auth
+                    <li>
+                        <form action="/auth/logout" method="post">
+                            @csrf
+                            @method('delete')
+                            <button>Se deconnecter</button>
+                        </form>
+                    </li>
+                    @endauth
+                    @guest
+                        <li><a href="/auth/login">Se connecter</a></li>
+                    @endguest
                 </ul>
             </nav><!-- .navbar -->
 

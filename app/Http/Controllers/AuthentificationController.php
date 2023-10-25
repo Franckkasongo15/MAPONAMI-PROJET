@@ -23,6 +23,8 @@ class AuthentificationController extends Controller
     public function AuthVerification(LoginRequest $request)
     {
 
+        //dd(strpos($request->email, 'esisalama.org'));
+
         $credentials = $request->validated();
 
         if (strpos($request->email, 'esisalama.org')) {
@@ -54,7 +56,6 @@ class AuthentificationController extends Controller
 
     public function register(LoginRequest $request)
     {
-        //dd($request);
 
         $credentials = $request->validated();
 
@@ -89,6 +90,6 @@ class AuthentificationController extends Controller
 
     public function  logout(){
         Auth::logout();
-            return to_route('login');
+            return to_route('index');
     }
 }

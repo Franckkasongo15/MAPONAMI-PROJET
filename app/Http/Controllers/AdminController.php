@@ -38,12 +38,13 @@ class AdminController extends Controller
         ]);
     }
 
-    public function Dologin(Request $request){
+    public function doLogin(Request $request){
         if (strpos($request->email, 'esisalama.org')) {
             $credentials = [
                     'email' => $request->email,
                     'password' => $request->password,
                 ];
+
             $get_admin = User::where('email', $request->email)->get('admin');
             $true_admin = "";
             foreach($get_admin as $admin){
@@ -56,11 +57,12 @@ class AdminController extends Controller
                 ]);
             }
 
+
             if (Auth::attempt($credentials)) {
                     $request->session()->regenerate();
-                    return redirect()->route('Admin.dash');
+                    return redirect()->route('admin.dash.index');
             }else{
-                return redirect()->route('Admin.login')->withErrors([
+                return redirect()->route('admin.login')->withErrors([
                     'notfound' => 'Aucun utilisateur trouvé!'
                 ]);
             }

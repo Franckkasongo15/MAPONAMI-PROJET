@@ -50,7 +50,18 @@
                     <li><a href="{{ route('index') }}">Acceuil</a></li>
                     <li><a href="voter.html">Voter</a></li>
                     <li><a href="#contact">Statistique</a></li>
-                    <li><a href="logout">Se deconnecter</a></li>
+                    @auth
+                    <li>
+                        <form action="/auth/logout" method="post">
+                            @csrf
+                            @method('delete')
+                            <button>Se <dec></dec>onnecter</button>
+                        </form>
+                    </li>
+                    @endguest
+                    @guest
+                        <li><a href="/auth/login">Se connecter</a></li>
+                    @endguest
 
                 </ul>
             </nav><!-- .navbar -->
@@ -118,6 +129,7 @@
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="row">
+
                             <!--DEbut candidat-->
                             @foreach ($info_candidats as $info)
                                 <div class="col">
@@ -139,7 +151,7 @@
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
                                         <div class=" align-items-center ">
-                                            <form action="/jevote?tab_info=" method="post">
+                                            <form action="/voter?tab_info=" method="post">
                                                 @csrf
                                                 <input type="hidden" name="user"
                                                     value="{{ Auth::user()->promotion }}">

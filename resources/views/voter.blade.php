@@ -151,6 +151,7 @@
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
                                         <div class=" align-items-center ">
+                                            @auth
                                             <form action="/voter?tab_info=" method="post">
                                                 @csrf
                                                 <input type="hidden" name="user"
@@ -168,7 +169,13 @@
                                                     voter
                                                 </button>
                                             </form>
-
+                                            @endauth
+                                            @guest
+                                                    <form action="{{route('auth.login')}}" method="get">
+                                                        @csrf
+                                                        <button class="btn">Acceder aux votes</button>
+                                                    </form>
+                                            @endguest
                                         </div>
                                     </div>
                                 </div>

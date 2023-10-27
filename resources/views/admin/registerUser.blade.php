@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('admin.base')
 
-<head>
+@section('title', 'Nouveau candidat')
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Enrengistrement candidat</title>
-    <link href="{{ asset('assets/img/voting-box.png') }}" rel="icon">
-    <!-- Custom fonts for this template-->
-    <link href="Admin/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <link href="Admin/registerForm/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet"
-        media="all">
-    <link href="Admin/registerForm/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="Admin/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="Admin/registerForm/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="Admin/registerForm/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-    <link href="Admin/registerForm/css/main.css" rel="stylesheet" media="all">
-
-</head>
-
-<body id="page-top">
+@section('content')
+    <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -41,7 +12,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('index')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -53,7 +24,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/adminDash">
+                <a class="nav-link" href="{{route('admin.dash.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -80,8 +51,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="/registerUser">Nouveau candidat</a>
-                        <a class="collapse-item" href="utilities-border.html">Supprimer Candidat</a>
+                        <a class="collapse-item" href="{{route('admin.dash.register')}}">Nouveau candidat</a>
+                        <a class="collapse-item" href="#">Supprimer Candidat</a>
                     </div>
                 </div>
             </li>
@@ -138,7 +109,7 @@
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <!-- ICI POUR LES CANDIDATURES -->
-                            <a class="nav-link " href="google.com" id="alertsDropdown" target="_blank"
+                            <a class="nav-link " href="#" id="alertsDropdown" target="_blank"
                                 aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
@@ -152,7 +123,7 @@
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="https://mail.google.com/mail/u/0/?hl=fr#inbox"
+                            <a class="nav-link dropdown-toggle" href="#"
                                 target="_blank" id="messagesDropdown" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
@@ -380,7 +351,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="{{route('auth.logout')}}">Logout</a>
                     </div>
                 </div>
             </div>
@@ -414,7 +385,7 @@
         <!-- Page level custom scripts -->
         <script src="Admin/dashboard/js/demo/chart-area-demo.js"></script>
         <script src="Admin/dashboard/js/demo/chart-pie-demo.js"></script>
-
+    </div>
 </body>
+@endsection
 
-</html>

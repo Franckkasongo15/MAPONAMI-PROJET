@@ -41,26 +41,26 @@
     <header id="header" class="header d-flex align-items-center">
 
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{{route('index')}}" class="logo d-flex align-items-center">
 
                 <h1>MAPONAMI<span>.</span></h1>
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{ route('index') }}">Acceuil</a></li>
-                    <li><a href="voter.html">Voter</a></li>
+                    <li><a href="{{route('user.vote')}}">Voter</a></li>
                     <li><a href="#contact">Statistique</a></li>
                     @auth
                     <li>
-                        <form action="/auth/logout" method="post">
+                        <form action="{{route('auth.logout')}}" method="post">
                             @csrf
                             @method('delete')
-                            <button>Se <dec></dec>onnecter</button>
+                            <button>Se deconnecter</button>
                         </form>
                     </li>
                     @endguest
                     @guest
-                        <li><a href="/auth/login">Se connecter</a></li>
+                        <li><a href="{{route('auth.login')}}">Se connecter</a></li>
                     @endguest
 
                 </ul>
@@ -80,7 +80,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-6 text-center">
                             <h2>VOTER</h2>
-                            <p>Voter responsable chers etudiants et gardé secret </p>
+                            <p>Votez responsable chers etudiants et gardé secret </p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             <nav>
                 <div class="container">
                     <ol>
-                        <li><a href="index.html">ACCEUIL</a></li>
+                        <li><a href="{{route('index')}}">ACCEUIL</a></li>
                         <li>voter</li>
                     </ol>
                 </div>
@@ -197,7 +197,7 @@
                 <div class="container">
                     <div class="row gy-4">
                         <div class="col-lg-5 col-md-12 footer-info">
-                            <a href="index.html" class="logo d-flex align-items-center">
+                            <a href="{{route('index')}}" class="logo d-flex align-items-center">
                                 <span>MAPONAMI</span>
                             </a>
                             <p> Suivez également toutes les informations sur </p>
@@ -212,8 +212,8 @@
                         <div class="col-lg-2 col-6 footer-links">
                             <h4>Retour</h4>
                             <ul>
-                                <li><a href="index.html">Acceuil</a></li>
-                                <li><a href="voter.html">Voter</a></li>
+                                <li><a href="{{route('index')}}">Acceuil</a></li>
+                                <li><a href="{{route('user.vote')}}">Voter</a></li>
                                 <li><a href="#">Statistique</a></li>
                                 <li><a href="#">connexion</a></li>
                                 <li><a href="#">other</a></li>

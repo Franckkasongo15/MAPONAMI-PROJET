@@ -32,7 +32,7 @@ class AuthentificationController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 //return redirect()->intended(route('home'));
-                return redirect()->route('index');
+                return redirect()->intended(route('index'));
             } else {
                 return view('Auth.login')->withErrors([
                     'email' => 'Utilisateur non trouver',

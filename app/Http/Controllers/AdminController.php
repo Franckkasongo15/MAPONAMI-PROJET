@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function login(){
-        return view('Admin.login');
+        return view('admin.login');
     }
 
     public function home(){
@@ -32,7 +32,7 @@ class AdminController extends Controller
         }
 
 
-        return view('Admin.dash',[
+        return view('admin.dash',[
             'l2_infos' => $l2_infos,
             'l1_infos' => $l1_infos,
         ]);
@@ -52,7 +52,7 @@ class AdminController extends Controller
             }
 
             if($true_admin != 'admin'){
-                return redirect()->route('Admin.login')->withErrors([
+                return redirect()->route('admin.login')->withErrors([
                     'email' => 'Vous n\'etes pas admin !'
                 ]);
             }
@@ -60,14 +60,14 @@ class AdminController extends Controller
 
             if (Auth::attempt($credentials)) {
                     $request->session()->regenerate();
-                    return redirect()->route('admin.dash.index');
+                    return redirect()->intended(route('admin.dash.index'));
             }else{
                 return redirect()->route('admin.login')->withErrors([
                     'notfound' => 'Aucun utilisateur trouvé!'
                 ]);
             }
         }else{
-            return redirect()->route('Admin.login')->withErrors([
+            return redirect()->route('admin.login')->withErrors([
                 'email' => 'Le mail n\'est pas correct !'
             ]);
         }
@@ -86,7 +86,7 @@ class AdminController extends Controller
             'admin' => "admin",
             'password' => Hash::make($mdp)
         ])){
-            echo "Admin cree";
+            echo "admin cree";
         }
 
     }
@@ -94,7 +94,7 @@ class AdminController extends Controller
 
 
     public function registerform(){
-        return view('Admin.registerUser');
+        return view('admin.registerUser');
     }
 
     /**
@@ -125,7 +125,7 @@ class AdminController extends Controller
             $isUserExist = Vote::where('email', $request->email)->get();
             if(sizeof($isUserExist)  > 0){
 
-                return redirect()->route('Admin.registerUser')->withErrors([
+                return redirect()->route('admin.registerUser')->withErrors([
                     'email' => 'L\'adresse email déjà été utiliser',
                 ]);
 
@@ -133,7 +133,9 @@ class AdminController extends Controller
 
             }else{
 
-                $image = Image::make($request->file('image'));
+                //dd($request->file('image'));
+
+                $image = \Image::make($request->file('image'));
 
                 $imageName = time().'-'.$request->file('image')->getClientOriginalName();
 

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserAction extends Controller
 {
     public function votePage(){
-        $info_candidats = Vote::all();
+        $info_candidats = Vote::all()->sortByDesc('created_at');
 
         return view('voter', [
             'info_candidats' => $info_candidats

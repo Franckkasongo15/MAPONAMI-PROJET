@@ -46,19 +46,19 @@
     <header id="header" class="header d-flex align-items-center">
 
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{{route('index')}}" class="logo d-flex align-items-center">
 
 
                 <h1>MAPONAMI<span>.</span></h1>
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="/home">Accueil</a></li>
-                    <li><a href="/voter">Voter</a></li>
+                    <li><a href="{{route('index')}}">Accueil</a></li>
+                    <li><a href="{{route('user.vote')}}">Voter</a></li>
                     <li><a href="#contact">Statistiques</a></li>
                     @auth
                     <li>
-                        <form action="/auth/logout" method="post">
+                        <form action="{{route('auth.logout')}}" method="post">
                             @csrf
                             @method('delete')
                             <button>Se deconnecter</button>
@@ -66,7 +66,7 @@
                     </li>
                     @endauth
                     @guest
-                        <li><a href="/auth/login">Se connecter</a></li>
+                        <li><a href="{{route('auth.login')}}">Se connecter</a></li>
                     @endguest
                 </ul>
             </nav><!-- .navbar -->
@@ -316,7 +316,7 @@
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-info">
-                    <a href="index.html" class="logo d-flex align-items-center">
+                    <a href="{{route('index')}}" class="logo d-flex align-items-center">
                         <span>MAPONAMI</span>
                     </a>
                     <p> Suivez également toutes les informations sur </p>
@@ -331,8 +331,8 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Retour</h4>
                     <ul>
-                        <li><a href="index.html">ACCEUIL</a></li>
-                        <li><a href="voter.html">voter</a></li>
+                        <li><a href="{{route('index')}}">ACCEUIL</a></li>
+                        <li><a href="{{route('user.vote')}}">voter</a></li>
                         <li><a href="#">statistique</a></li>
                         <li><a href="#">connexion</a></li>
                         <li><a href="#">other</a></li>

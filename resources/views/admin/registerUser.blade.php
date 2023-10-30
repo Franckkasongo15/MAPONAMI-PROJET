@@ -51,7 +51,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="{{route('admin.dash.register')}}">Nouveau candidat</a>
+                        <a class="collapse-item" href="{{route('admin.dash.registerCandidate')}}">Nouveau candidat</a>
                         <a class="collapse-item" href="#">Supprimer Candidat</a>
                     </div>
                 </div>
@@ -323,7 +323,6 @@
                     </div>
                 </footer>
                 <!-- End of Footer -->
-
             </div>
             <!-- End of Content Wrapper -->
 

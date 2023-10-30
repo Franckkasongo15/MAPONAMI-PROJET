@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Image;
 use App\Models\User;
 use App\Models\Vote;
@@ -17,8 +19,10 @@ class AdminController extends Controller
 
     public function home(){
         $informations = Vote::all();
+
         $l1_infos = [];
         $l2_infos = [];
+        $l3_infos = [];
         foreach($informations as $infos){
 
             if($infos['promotion'] == "l1"){
@@ -29,12 +33,17 @@ class AdminController extends Controller
                 $l2_infos [] = [$infos];
             }
 
+            if($infos['promotion'] == "l3"){
+                $l3_infos [] = [$infos];
+            }
+
         }
 
 
         return view('admin.dash',[
             'l2_infos' => $l2_infos,
             'l1_infos' => $l1_infos,
+            'l3_infos' => $l3_infos,
         ]);
     }
 
@@ -107,7 +116,7 @@ class AdminController extends Controller
 
      */
 
-    public function storeUser(Request $request){
+    public function storeCandidate(Request $request){
 
 
         /*Traitement de l'image */
@@ -170,4 +179,17 @@ class AdminController extends Controller
         }
 
     }
+
+
+    public function registerUser(){
+        return view('user.register');
+    }
+
+    public function uploadUser() {
+
+        Excel::import(new UsersImport, request()->file('file'));
+
+        return redirect()->back()->with('success', 'Le fichier Excel a été importé avec succès.');
+    }
+
 }

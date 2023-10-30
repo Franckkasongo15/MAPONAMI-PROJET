@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('000000'),
             'admin' => 'admin'
         ]);
-       Vote::factory()->create();
-       Voted::factory()->create();
+
+        //User::factory(2)->create();
+        Vote::factory(3)->create();
     }
 }

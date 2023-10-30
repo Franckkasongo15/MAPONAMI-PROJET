@@ -23,7 +23,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/adminDash">
+                <a class="nav-link" href="{{route('admin.dash.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -50,7 +50,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="/registerUser">Nouveau candidat</a>
+                        <a class="collapse-item" href="{{route('admin.dash.register')}}">Nouveau candidat</a>
                         <a class="collapse-item" href="utilities-border.html">Supprimer Candidat</a>
                     </div>
                 </div>
@@ -269,149 +269,46 @@
                             </div>
 
                         </div>
+
                         <div class="col-lg-6 mb-4">
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Statisques Licence 3 Genie log </h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Statisques Licence 3 </h6>
                                 </div>
+
+
                                 <div class="card-body">
+                                    @foreach ($l3_infos as $info_candidats)
+                                        @foreach ($info_candidats as $key)
+                                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                                <div class="dropdown-list-image mr-3">
+                                                    <img class="img-profile rounded-circle"
+                                                         src="img_user/{{ $key['photo'] }}" width=50 alt="">
+                                                    <div class="status-indicator bg-success"></div>
+                                                </div>
+                                                <div class="font-weight-bold">
+                                                    {{ ucwords($key['name']) }}
+                                                </div>
+                                            </a>
+                                            <h4 class="small font-weight-bold"> {{ $key['voter_number'] }} / 200
+                                                <span
+                                                    class="float-right">{{ ($key['voter_number'] * 100) / 200 }}</span>
+                                            </h4>
+                                            <div class="progress mb-4">
+                                                <div class="progress-bar
+                                                bg-danger"
+                                                     role="progressbar"
+                                                     style="width: {{ ($key['voter_number'] * 100) / 200 }}%"
+                                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
 
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Nom du candidat
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold">35/50<span
-                                            class="float-right">{{ (35 * 100) / 50 }}%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar"
-                                            style="width: {{ (35 * 100) / 50 }}%" aria-valuenow="60"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <hr>
-
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Mathieu Nebra
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold">40/400<span
-                                            class="float-right">{{ (40 * 100) / 400 }}%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                            style="width: {{ (40 * 100) / 400 }}%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <hr>
-
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Graven ...
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold"> <span class="float-right">Complete!</span>
-                                    </h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                            <hr>
+                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 mb-4">
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Statisques Licence 3 As </h6>
-                                </div>
-                                <div class="card-body">
 
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Nom du candidat
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold">35/50<span
-                                            class="float-right">{{ (35 * 100) / 50 }}%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar"
-                                            style="width: {{ (35 * 100) / 50 }}%" aria-valuenow="60"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <hr>
-
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Mathieu Nebra
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold">40/400<span
-                                            class="float-right">{{ (40 * 100) / 400 }}%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                            style="width: {{ (40 * 100) / 400 }}%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <hr>
-
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="img-profile rounded-circle"
-                                                src="assets/img/blog/thumbnail/1691696945-R (1).jpg" width=50
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            Graven ...
-                                        </div>
-                                    </a>
-
-                                    <h4 class="small font-weight-bold">230/400<span class="float-right">230</span>
-                                    </h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

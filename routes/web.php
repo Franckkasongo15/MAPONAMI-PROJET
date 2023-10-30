@@ -20,6 +20,9 @@ use App\Http\Controllers\AuthentificationController;
 
 Route::get('/', [AuthentificationController::class, 'home'])->name('index');
 
+#CANDIDAT
+
+
 
 #AUTHENTIFICATION
 Route::prefix('/auth')->name('auth.')->controller(AuthentificationController::class)->group( function () {
@@ -37,8 +40,10 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->gro
     Route::post('/','doLogin');
     Route::prefix('/dash')->name('dash.')->middleware('Admin')->group(function (){
         Route::get('/','home')->name('index');
-        Route::get('/registerUser', 'registerform')->name('register');
-        Route::post('/registerUser', 'storeUser');
+        Route::get('/candidate-form', 'registerform')->name('registerCandidate');
+        Route::post('/register-candidate', 'storeCandidate');
+        Route::get('/register-users', 'registerUser')->name('registerUser');
+        Route::post('/register-users', 'uploadUser')->name('uploadUser');
     });
 
 });

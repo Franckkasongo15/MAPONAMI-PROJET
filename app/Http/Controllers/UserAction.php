@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vote;
+use App\Models\Candidate;
 use App\Models\Voted;
 use Illuminate\Http\Request;
 
 class UserAction extends Controller
 {
     public function votePage(){
-        $info_candidats = Vote::all()->sortByDesc('created_at');
+        $info_candidats = Candidate::all()->sortByDesc('created_at');
 
         return view('voter', [
             'info_candidats' => $info_candidats
@@ -29,7 +29,7 @@ class UserAction extends Controller
                     'email' => strtolower($request->usermail)
                 ]);
 
-                $vote = Vote::where('email',$request->candidatmail)->get('vote_number');
+                $vote = Candidate::where('email',$request->candidatmail)->get('vote_number');
 
                 $vote_incrementations =0 ;
                 echo "avant ". $vote_incrementations;
@@ -39,9 +39,9 @@ class UserAction extends Controller
 
                 $vote_incrementations +=1;
 
-                Vote::where('email',$request->candidatmail)->update(['vote_number'=> $vote_incrementations]);
+                Candidate::where('email',$request->candidatmail)->update(['vote_number'=> $vote_incrementations]);
 
-                $vote = Vote::where('email',$request->candidatmail)->get('vote_number');
+                $vote = Candidate::where('email',$request->candidatmail)->get('vote_number');
                 return redirect()->route('user.vote')->with('success', 'Le vote a ete effectuer avec success');
             }
 

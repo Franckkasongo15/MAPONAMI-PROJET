@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
-use App\Models\Vote;
+use App\Models\Candidate;
 use App\Models\Voted;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //User::factory(2)->create();
-        Vote::factory(3)->create();
+        Candidate::factory(3)->create();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\UserAction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -20,7 +21,10 @@ use App\Http\Controllers\AuthentificationController;
 
 Route::get('/', [AuthentificationController::class, 'home'])->name('index');
 
-#CANDIDAT
+
+
+Route::resource('candidate', CandidateController::class)->except('show');
+
 
 
 

@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('prenom');
+            $table->string('firstname');
             $table->string('pseudo');
             $table->string('genre');
-            $table->string('numero');
-            $table->string('photo');
-            $table->string('motivation');
+            $table->string('phone');
+            $table->string('photo')->nullable();
+            $table->longText('motivation');
             $table->string('promotion');
-            $table->string('slogan');
+            $table->longText('slogan');
             $table->string('email')->unique();
             $table->integer('vote_number');
             $table->timestamps();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('candidates');
     }
 };

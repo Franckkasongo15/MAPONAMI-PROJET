@@ -6,7 +6,7 @@ use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Image;
 use App\Models\User;
-use App\Models\Vote;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +18,7 @@ class AdminController extends Controller
     }
 
     public function home(){
-        $informations = Vote::all();
+        $informations = Candidate::all();
 
         $l1_infos = [];
         $l2_infos = [];
@@ -131,7 +131,7 @@ class AdminController extends Controller
 
         if($request->hasFile('image')) {
 
-            $isUserExist = Vote::where('email', $request->email)->get();
+            $isUserExist = Candidate::where('email', $request->email)->get();
             if(sizeof($isUserExist)  > 0){
 
                 return redirect()->route('admin.registerUser')->withErrors([
@@ -154,7 +154,7 @@ class AdminController extends Controller
 
                 $image->save($destinationPathThumbnail.$imageName);
 
-                Vote::create([
+                Candidate::create([
                     'name' => strtolower($request->name),
                     'prenom' => strtolower($request->prenom),
                     'pseudo' => strtolower($request->pseudo),

@@ -51,7 +51,7 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="{{route('admin.dash.registerCandidate')}}">Nouveau candidat</a>
+                        <a class="collapse-item" href="{{route('admin.dash.candidate.create')}}">Nouveau candidat</a>
                         <a class="collapse-item" href="#">Supprimer Candidat</a>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                     <div class="card card-4">
                         <div class="card-body">
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <form method="post" action="{{route('candidate.store')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('admin.dash.candidate.store')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row row-space">
                                         <div class="col-5">
@@ -253,10 +253,9 @@
                                             <div class="input-group">
                                                 <label class="label">Photo</label>
                                                 <br />
-
                                                 <input type="file" name="image" class="image" >
+                                                @error('image'){{$message}} @enderror
                                             </div>
-
                                         </div>
 
                                     </div>

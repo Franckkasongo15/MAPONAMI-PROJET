@@ -22,15 +22,13 @@ class CandidateRequest extends FormRequest
      */
     public function rules(): array
     {
-        //dd($this->route()->parameter('candidate'));
-
         return [
             'name' => ['required', 'string'],
             'firstname' => ['required', 'string'],
             'pseudo' => ['required', 'string', Rule::unique('candidates')->ignore($this->route()->parameter('candidate'))],
             'genre' => ['required'],
             'phone' => ['required', 'regex:/^[0-9\-]+$/'],
-            //'photo' => ['required'],
+            'image' => ['required', 'max:2000'],
             'promotion' => ['required'],
             'motivation' => ['required'],
             'slogan' => ['required'],

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Candidate extends Model
 {
@@ -15,11 +16,17 @@ class Candidate extends Model
         'pseudo',
         'genre',
         'phone',
-        'photo',
+        'image',
         'promotion',
         'motivation',
         'slogan',
         'vote_number'
 
     ];
+
+    public function users(): BelongsToMany
+    {
+      return $this->belongsToMany(User::class);
+    }
+
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('pseudo');
             $table->string('genre');
             $table->string('phone');
-            $table->string('photo')->nullable();
+            $table->string('image');
             $table->longText('motivation');
             $table->string('promotion');
             $table->longText('slogan');

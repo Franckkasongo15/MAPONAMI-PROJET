@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\CandidateController;
-use App\Http\Controllers\UserAction;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\AuthentificationController;
+use App\Http\Controllers\Admin\UserController as UserAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,22 +20,22 @@ use App\Http\Controllers\AuthentificationController;
 |
 */
 
-Route::get('/', [AuthentificationController::class, 'home'])->name('index');
+#HOMEPAGE
 
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
-
-Route::resource('candidate', CandidateController::class)->except('show');
-
-
+#USER
+Route::prefix('/')->controller(UserController::class)->name('user.')->group(function (){
+    Route::get('/voter','votePage')->name('vote');
+    Route::post('/voter', 'doVote')->middleware('Auth');
+});
 
 
 #AUTHENTIFICATION
 Route::prefix('/auth')->name('auth.')->controller(AuthentificationController::class)->group( function () {
-    Route::get('/login', 'loadForm')->name('login');
-    Route::post('/login','AuthVerification');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login','doLogin');
     Route::delete('/logout', 'logout')->name('logout');
-    Route::get('/register', 'registerRedirect')->name('register');
-    Route::post('/register','register');
 });
 
 
@@ -42,22 +43,27 @@ Route::prefix('/auth')->name('auth.')->controller(AuthentificationController::cl
 Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->group(function (){
     Route::get('/', 'login')->name('login');
     Route::post('/','doLogin');
+    #DASHBOARD
     Route::prefix('/dash')->name('dash.')->middleware('Admin')->group(function (){
         Route::get('/','home')->name('index');
-        Route::get('/candidate-form', 'registerform')->name('registerCandidate');
-        Route::post('/register-candidate', 'storeCandidate');
-        Route::get('/register-users', 'registerUser')->name('registerUser');
-        Route::post('/register-users', 'uploadUser')->name('uploadUser');
+        #USER MANAGEMENT
+        Route::prefix('/users')->controller(UserAdmin::class)->name('users.')->group(function (){
+            Route::get('/register-users', 'create')->name('createUsers');
+            Route::post('/register-users', 'store')->name('storeUsers');
+        });
+        #CAMDIDATE MANAGEMENT
+        Route::resource('candidate', CandidateController::class)->except('show');
     });
 
 });
 
 
-#USER
-Route::prefix('/')->controller(UserAction::class)->name('user.')->group(function (){
-    Route::get('/voter','votePage')->name('vote');
-    Route::post('/voter', 'doVote')->middleware('Auth');
-});
+
+
+
+
+
+
 
 #IMAGE
 Route::controller(ImageController::class)->group(function(){

@@ -18,9 +18,9 @@ class CandidateFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'prenom' => $this->faker->name(),
+            'firstname' => $this->faker->name(),
             'pseudo' => $this->faker->name(),
-            'numero' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->phoneNumber(),
             'genre' => 'm|f',
             'photo' => '',
             'vote_number' => $this->faker->numberBetween(1, 20),

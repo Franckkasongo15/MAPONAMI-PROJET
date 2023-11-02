@@ -9,6 +9,27 @@ use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
+
+
+    private function extrateData(Candidate $candidate, CandidateRequest $request):array{
+
+        $data = $request->validated();
+        $image = $data['image'];
+        $imageName = time().'-'.$candidate->email;
+
+        /** @var UploadedFile $image */
+        if($image == null || $image->getError()){
+            return $data;
+        }
+        if($candidate->image){
+            Storage::disk('public/')->delete($candidate->image);
+        }
+
+        $data['image'] = $image->store('candidates', 'public');
+        return $data;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -32,9 +53,9 @@ class CandidateController extends Controller
      */
     public function store(CandidateRequest $request, Candidate $candidate)
     {
-
-        Candidate::create($request->validated());
-        return redirect()->route('candidate.index')->with(['success' => 'le candidat a ete bien cree']);
+        //dd($this->extrateData($candidate, $request));
+        Candidate::create($this->extrateData($candidate, $request));
+        return redirect()->route('admin.dash.candidate.index')->with(['success' => 'le candidat a ete bien cree']);
     }
 
 

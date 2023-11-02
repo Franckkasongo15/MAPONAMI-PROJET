@@ -1,4 +1,4 @@
-@extends('Auth.base')
+@extends('auth.base')
 
 @section('content')
 
@@ -24,7 +24,6 @@
             @error('email')
                 {{ $message }}
             @enderror
-            <a href="{{route('auth.register')}}">S'enregistrer ?</a>
             @csrf
             <div class="form-group mx-sm-2 mb-2">
                 <input type="email" class="form-control" placeholder="xxxxxx@esisalama.org" name="email">

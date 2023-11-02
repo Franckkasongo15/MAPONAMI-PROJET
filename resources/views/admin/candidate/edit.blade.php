@@ -51,7 +51,7 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="{{route('admin.dash.registerCandidate')}}">Nouveau candidat</a>
+                        <a class="collapse-item" href="{{route('admin.dash.candidate.create')}}">Nouveau candidat</a>
                         <a class="collapse-item" href="#">Supprimer Candidat</a>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                     <div class="card card-4">
                         <div class="card-body">
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <form method="POST" action="{{route('candidate.update', $candidate )}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('admin.dash.candidate.update', $candidate )}}" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="row row-space">

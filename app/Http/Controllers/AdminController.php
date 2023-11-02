@@ -181,15 +181,4 @@ class AdminController extends Controller
     }
 
 
-    public function registerUser(){
-        return view('user.register');
-    }
-
-    public function uploadUser() {
-
-        Excel::import(new UsersImport, request()->file('file'));
-
-        return redirect()->back()->with('success', 'Le fichier Excel a été importé avec succès.');
-    }
-
 }

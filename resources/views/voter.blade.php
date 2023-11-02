@@ -135,10 +135,10 @@
                                 <div class="col">
                                     <div class="candidat">
                                         <div class="d-flex align-items-center">
-                                            <img src="img_user/{{ $info['photo'] }}"
+                                            <img src="storage/{{ $info['image'] }}"
                                                 class="testimonial-img flex-shrink-0" alt="">
                                             <div>
-                                                <h3>{{ strtoupper($info['prenom']) }}</h3>
+                                                <h3>{{ strtoupper($info['firstname']) }}</h3>
                                                 <h4>{{ strtoupper($info['promotion']) }}</h4>
 
                                             </div>
@@ -146,8 +146,6 @@
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
                                             {{ ucfirst($info['motivation']) }}
-                                            Llfldlflddf,<br>
-                                            fdfkjdk <br>
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
                                         <div class=" align-items-center ">

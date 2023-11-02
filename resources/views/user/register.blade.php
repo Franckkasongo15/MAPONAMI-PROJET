@@ -32,7 +32,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <div class="rs-select2 js-select-simple select--no-search">
-                    <form method="POST" action="{{route('users.createUsers')}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('admin.dash.users.createUsers')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
                             <label class="label">fichier a importer</label>

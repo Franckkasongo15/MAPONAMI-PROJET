@@ -54,7 +54,8 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{route('index')}}">Accueil</a></li>
-                    <li><a href="{{route('user.vote')}}">Voter</a></li>
+                    <li><a href="{{route('user.publicVote')}}">Vote BDE</a></li>
+                    <li><a href="{{route('user.publicVote')}}">Vote promotionnel</a></li>
                     <li><a href="#contact">Statistiques</a></li>
                     @auth
                     <li>
@@ -332,7 +333,8 @@
                     <h4>Retour</h4>
                     <ul>
                         <li><a href="{{route('index')}}">ACCEUIL</a></li>
-                        <li><a href="{{route('user.vote')}}">voter</a></li>
+                        <li><a href="{{route('user.publicVote')}}">vote BDE</a></li>
+                        <li><a href="{{route('user.promotionVote')}}">vote promotionnel</a></li>
                         <li><a href="#">statistique</a></li>
                         <li><a href="#">connexion</a></li>
                         <li><a href="#">other</a></li>

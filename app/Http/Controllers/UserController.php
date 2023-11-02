@@ -20,10 +20,16 @@ class UserController extends Controller
         return false;
     }
 
-    public function votePage(){
+    public function publicVote(){
         $candidates = Candidate::all()->sortByDesc('created_at');
+        return view('vote.public', [
+            'candidates' => $candidates
+        ]);
+    }
 
-        return view('voter', [
+    public function promotionVote(){
+        $candidates = Candidate::where('promotion', Auth::user()->promotion)->get();
+        return view('vote.promotion', [
             'candidates' => $candidates
         ]);
     }
@@ -65,8 +71,18 @@ class UserController extends Controller
 
     }
 
-    public function publicVote(Request $request, Candidate $candidate){
-        if(!$this->isUserVoted($request)) {
+
+    public function doPromotionVote(Candidate $candidate ){
+        if (Auth::user()->promotion == $candidate->getAttribute('promotion')) {
+            Voted::create(['email' => Auth::user()->email ]);
+            $candidate['count_vote'] = $candidate['count_vote'] + 1;
+            $candidate->update($candidate->attributesToArray());
+            return redirect()->route('user.promotionVote', $candidate)->with(['success' => 'vous avez bien voté']);
+        }
+    }
+
+    public function doPublicVote(Candidate $candidate){
+        if(!$this->isUserVoted()) {
             Voted::create(['email' => Auth::user()->email ]);
             $candidate['count_vote'] = $candidate['count_vote'] + 1;
             $candidate->update($candidate->attributesToArray());

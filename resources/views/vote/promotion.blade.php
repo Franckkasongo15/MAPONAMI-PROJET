@@ -29,7 +29,7 @@
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
     </section>
@@ -44,7 +44,8 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{ route('index') }}">Acceuil</a></li>
-                    <li><a href="{{route('user.vote')}}">Voter</a></li>
+                    <li><a href="{{route('user.publicVote')}}">Vote BDE</a></li>
+                    <li><a href="{{route('user.promotionVote')}}">Vote promotionnel</a></li>
                     <li><a href="#contact">Statistique</a></li>
                     @auth
                     <li>
@@ -69,7 +70,7 @@
     <main id="main">
         <!-- ======= entete1 =======-->
         <div class="entete">
-            <div class="page-header d-flex align-items-center" style="background-image: url('');">
+            <div class="page-header d-flex align-items-center">
                 <div class="container position-relative">
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-6 text-center">
@@ -131,7 +132,7 @@
                                         </p>
                                         <div class=" align-items-center ">
                                             @auth
-                                            <form action="{{route('user.publicVote', $candidate )}}" method="post">
+                                            <form action="{{route('user.doPromotionVote', $candidate )}}" method="post">
                                                 @csrf
                                                 <button class="btn">voter</button>
                                             </form>
@@ -175,7 +176,7 @@
                             <h4>Retour</h4>
                             <ul>
                                 <li><a href="{{route('index')}}">Acceuil</a></li>
-                                <li><a href="{{route('user.vote')}}">Voter</a></li>
+                                <li><a href="{{route('user.publicVote')}}">Voter</a></li>
                                 <li><a href="#">Statistique</a></li>
                                 <li><a href="#">connexion</a></li>
                                 <li><a href="#">other</a></li>
@@ -222,7 +223,8 @@
 
             <!-- Template Main JS File -->
             <script src="{{ asset('assets/js/main.js') }}"></script>
-
+        </main>
+    </main>
 </body>
 
 </html>

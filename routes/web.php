@@ -26,8 +26,10 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 #USER
 Route::prefix('/')->controller(UserController::class)->name('user.')->group(function (){
-    Route::get('/voter','votePage')->name('vote');
-    Route::post('/voter/{candidate}', 'publicVote')->name('publicVote')->middleware('Auth');
+    Route::get('/vote','publicVote')->name('publicVote');
+    Route::get('/vote-promotion','promotionVote')->name('promotionVote')->middleware('Auth');
+    Route::post('/vote/{candidate}', 'doPublicVote')->name('doPublicVote')->middleware('Auth');
+    Route::post('/vote/{candidate}', 'doPromotionVote')->name('doPromotionVote')->middleware('Auth');
 });
 
 
@@ -47,7 +49,7 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->gro
     Route::prefix('/dash')->name('dash.')->middleware('Admin')->group(function (){
         Route::get('/','home')->name('index');
         #USER MANAGEMENT
-        Route::prefix('/users')->controller(UserAdmin::class)->name('users.')->group(function (){
+        Route::prefix('/')->controller(UserAdmin::class)->name('users.')->group(function (){
             Route::get('/register-users', 'create')->name('createUsers');
             Route::post('/register-users', 'store')->name('storeUsers');
         });

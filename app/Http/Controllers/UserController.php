@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Voted;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    private function isUserVoted(): bool|RedirectResponse
+    {
+        $isUservoted = Voted::where('email' ,strtolower(Auth::user()->email))->get();
+        if (sizeof($isUservoted)) {
+            return redirect()->route('user.vote')->with('failed', 'Vous Avez déjà voter');
+        }
+        return false;
+    }
+
     public function votePage(){
-        $info_candidats = Candidate::all()->sortByDesc('created_at');
+        $candidates = Candidate::all()->sortByDesc('created_at');
 
         return view('voter', [
-            'info_candidats' => $info_candidats
+            'candidates' => $candidates
         ]);
     }
 
@@ -46,11 +58,23 @@ class UserController extends Controller
             }
 
         }else{
-            echo "pas mm promotion";
+            echo "pas de la meme promotion";
             return redirect()->route('user.vote')->with('failed', 'Impossible de voter, car le candidat n\'est pass de votre premotion');
         }
         //return redirect()->route('voter')->with('success', "Le success message marche tres bien");
 
+    }
+
+    public function publicVote(Request $request, Candidate $candidate){
+        if(!$this->isUserVoted($request)) {
+            Voted::create(['email' => Auth::user()->email ]);
+            $candidate['count_vote'] = $candidate['count_vote'] + 1;
+            $candidate->update($candidate->attributesToArray());
+            return redirect()->route('user.vote')->with(['success' => 'vous avez bien voté']);
+
+        } else {
+            return redirect()->route('user.vote')->with(['failed' => 'Vous avez deja voté']);
+        }
     }
 
 }

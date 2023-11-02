@@ -21,13 +21,14 @@ class CandidateFactory extends Factory
             'firstname' => $this->faker->name(),
             'pseudo' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
-            'genre' => 'm|f',
-            'photo' => '',
+            'genre' => 'm',
+            'image' => '',
             'vote_number' => $this->faker->numberBetween(1, 20),
             'motivation' => $this->faker->sentences(4, true),
             'promotion' => 'l'.$this->faker->numberBetween(1,3),
             'slogan' => $this->faker->sentences(4, true),
-            'email' => $this->faker->email()
+            'email' => $this->faker->email(),
+            'count_vote' => 0
         ];
     }
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->longText('slogan');
             $table->string('email')->unique();
             $table->integer('vote_number');
+            $table->integer('count_vote');
             $table->timestamps();
         });
     }

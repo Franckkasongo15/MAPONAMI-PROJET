@@ -12,11 +12,7 @@
     <!-- Favicons -->
     <link href="voting-box.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-
-
     <link rel="stylesheet" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
-
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
@@ -67,12 +63,10 @@
             </nav><!-- .navbar -->
             <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
             <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
         </div>
     </header>
 
     <main id="main">
-
         <!-- ======= entete1 =======-->
         <div class="entete">
             <div class="page-header d-flex align-items-center" style="background-image: url('');">
@@ -95,20 +89,8 @@
             </nav>
         </div><!-- entete1 -->
 
-
-
-
-
-
-
         <main id="main">
-
-
-
-
             <section id="candidats" class="candidats">
-
-
                 <div class="section-header">
                     <h2>TROUVER UN CANDIDAT </h2>
                     <p></p>
@@ -122,50 +104,36 @@
 
                 @if (session('failed'))
                     <div class="m-4 align-items-center ">
-                        <span class="alert alert-danger w-100">{{ session('failed') }} echec</span>
+                        <span class="alert alert-danger w-100">{{ session('failed') }}</span>
                     </div>
                 @endif
 
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="row">
-
                             <!--DEbut candidat-->
-                            @foreach ($info_candidats as $info)
+                            @foreach ($candidates as $candidate)
                                 <div class="col">
                                     <div class="candidat">
                                         <div class="d-flex align-items-center">
-                                            <img src="storage/{{ $info['image'] }}"
+                                            <img src="storage/{{ $candidate['image'] }}"
                                                 class="testimonial-img flex-shrink-0" alt="">
                                             <div>
-                                                <h3>{{ strtoupper($info['firstname']) }}</h3>
-                                                <h4>{{ strtoupper($info['promotion']) }}</h4>
+                                                <h3>{{ strtoupper($candidate['firstname']) }}</h3>
+                                                <h4>{{ strtoupper($candidate['promotion']) }}</h4>
 
                                             </div>
                                         </div>
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
-                                            {{ ucfirst($info['motivation']) }}
+                                            {{ ucfirst($candidate['motivation']) }}
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
                                         <div class=" align-items-center ">
                                             @auth
-                                            <form action="/voter?tab_info=" method="post">
+                                            <form action="{{route('user.publicVote', $candidate )}}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="user"
-                                                    value="{{ Auth::user()->promotion }}">
-                                                <input type="hidden" name="usermail"
-                                                    value="{{ Auth::user()->email }}">
-
-                                                <input type="hidden" name="candidatmail" value="{{ $info['email'] }}">
-
-                                                <input type="hidden" name="promotionUser"
-                                                    value="{{ Auth::user()->promotion }}">
-                                                <input type="hidden" name="promotionCandidat"
-                                                    value="{{ $info['promotion'] }}">
-                                                <button class="btn">
-                                                    voter
-                                                </button>
+                                                <button class="btn">voter</button>
                                             </form>
                                             @endauth
                                             @guest
@@ -178,23 +146,12 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
-
-
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
-
                 </div>
                 </div>
             </section><!-- End Testimonials Section -->
-
-
-
-
-
-
 
             <!-- ======= Footer ======= -->
             <footer id="footer" class="footer">

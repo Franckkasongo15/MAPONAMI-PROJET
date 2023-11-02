@@ -27,7 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 #USER
 Route::prefix('/')->controller(UserController::class)->name('user.')->group(function (){
     Route::get('/voter','votePage')->name('vote');
-    Route::post('/voter', 'doVote')->middleware('Auth');
+    Route::post('/voter/{candidate}', 'publicVote')->name('publicVote')->middleware('Auth');
 });
 
 
@@ -54,22 +54,4 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->gro
         #CAMDIDATE MANAGEMENT
         Route::resource('candidate', CandidateController::class)->except('show');
     });
-
 });
-
-
-
-
-
-
-
-
-
-#IMAGE
-Route::controller(ImageController::class)->group(function(){
-    Route::get('image-upload', 'index');
-    Route::post('image-upload', 'store')->name('image.store');
-});
-
-
-

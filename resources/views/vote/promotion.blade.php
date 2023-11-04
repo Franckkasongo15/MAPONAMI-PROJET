@@ -132,7 +132,7 @@
                                         </p>
                                         <div class=" align-items-center ">
                                             @auth
-                                            <form action="{{route('user.doPromotionVote', $candidate )}}" method="post">
+                                            <form action="{{route('user.doPromotionVote',$candidate )}}" method="post">
                                                 @csrf
                                                 <button class="btn">voter</button>
                                             </form>

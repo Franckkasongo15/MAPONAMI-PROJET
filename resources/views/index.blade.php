@@ -89,7 +89,7 @@
                     <p>Site electoral universitaire </p>
 
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="https://form.jotform.com/232215830578558" class="btn-get-started">Postuler</a>
+                        <a href="https://form.jotform.com/franckkasongokalala/maponami" class="btn-get-started">Postuler</a>
                     </div>
                     <!--
                         <div class="d-flex justify-content-center justify-content-lg-start">

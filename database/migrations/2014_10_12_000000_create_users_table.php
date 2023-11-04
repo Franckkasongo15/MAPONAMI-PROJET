@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('promotion');
             $table->string('admin')->nullable();
             $table->string('password');
+            $table->boolean('public_vote')->default(false);
+            $table->boolean('promotion_vote')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

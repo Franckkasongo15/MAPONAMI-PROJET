@@ -27,9 +27,9 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 #USER
 Route::prefix('/')->controller(UserController::class)->name('user.')->group(function (){
     Route::get('/vote','publicVote')->name('publicVote');
-    Route::get('/vote-promotion','promotionVote')->name('promotionVote')->middleware('Auth');
+    Route::get('/vote-promotionnel','promotionVote')->name('promotionVote')->middleware('Auth');
+    Route::post('/vote-promotionnel/{candidate}', 'doPromotionVote')->name('doPromotionVote')->middleware('Auth');
     Route::post('/vote/{candidate}', 'doPublicVote')->name('doPublicVote')->middleware('Auth');
-    Route::post('/vote/{candidate}', 'doPromotionVote')->name('doPromotionVote')->middleware('Auth');
 });
 
 

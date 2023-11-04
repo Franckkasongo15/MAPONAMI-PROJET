@@ -27,7 +27,7 @@ class AuthentificationController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 //return redirect()->intended(route('home'));
-                return redirect()->intended(route('user.vote'));
+                return redirect()->intended(route('user.publicVote'));
             } else {
                 return view('Auth.login')->withErrors([
                     'email' => 'Utilisateur non trouver',

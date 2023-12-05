@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('vote_number');
             $table->integer('count_vote')->default(0);
+            $table->boolean('bde')->default(true);
             $table->timestamps();
         });
     }

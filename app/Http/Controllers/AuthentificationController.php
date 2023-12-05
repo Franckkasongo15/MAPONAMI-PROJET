@@ -29,7 +29,7 @@ class AuthentificationController extends Controller
                 //return redirect()->intended(route('home'));
                 return redirect()->intended(route('user.publicVote'));
             } else {
-                return view('Auth.login')->withErrors([
+                return view('auth.login')->withErrors([
                     'email' => 'Utilisateur non trouver',
                 ]);
             }

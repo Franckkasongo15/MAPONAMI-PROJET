@@ -22,14 +22,16 @@ class UserController extends Controller
     }
 
     public function publicVote(){
-        $candidates = Candidate::all()->sortByDesc('created_at');
+        $candidates = Candidate::where('bde', '=', 1)->orderBy('vote_number', 'desc')->get();
         return view('vote.public', [
             'candidates' => $candidates
         ]);
     }
 
     public function promotionVote(){
-        $candidates = Candidate::where('promotion', Auth::user()->promotion)->get();
+        $candidates = Candidate::where('promotion', Auth::user()->promotion)
+            ->where('bde', '=', 0)
+            ->get();
         return view('vote.promotion', [
             'candidates' => $candidates
         ]);
